@@ -1,0 +1,19 @@
+services:
+  books-search-engine:
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    volumes:
+      - ./src:/app/src
+    ports:
+      - "3001:3001"
+    env_file: .env
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL}
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_POOL_MIN: ${DATABASE_POOL_MIN}
+      DATABASE_POOL_MAX: ${DATABASE_POOL_MAX}
