@@ -1,2 +1,1 @@
-# books-search-challenge
-Challenge for adks books search
+This is the readme for the autodesk books search engine challenge

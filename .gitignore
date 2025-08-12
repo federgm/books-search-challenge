@@ -1,0 +1,17 @@
+# Local packages installation
+node_modules
+
+# Local compiled app version
+dist
+
+# Local changes
+.tmp
+
+# Only if running on MacOS
+.DS_Store
+
+# Environment file
+.env
+
+# Tests results folder
+coverage

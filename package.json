@@ -1,0 +1,47 @@
+{
+  "name": "books-search-engine",
+  "version": "0.0.1",
+  "dependencies": {
+    "fastify": "^5.5.0",
+    "@fastify/cors": "^10.0.1",
+    "@fastify/formbody": "^8.0.1",
+    "@fastify/helmet": "^12.0.1",
+    "@fastify/request-context": "^6.0.1",
+    "@fastify/swagger": "^9.2.0",
+    "@fastify/swagger-ui": "^5.2.0",
+    "@fastify/type-provider-typebox": "^5.0.0",
+    "fastify-plugin": "^5.0.1",
+    "@sinclair/typebox": "^0.33.22",
+    "knex": "^3.1.0",
+    "pg": "^8.16.13"
+  },
+  "scripts": {
+    "lint:check": "eslint .",
+    "lint:ci:check": "eslint --quiet .",
+    "lint:fix": "eslint --fix .",
+    "lint": "npm run lint:ci:check",
+    "test": "jest",
+    "test:ci:cov": "jest test/unit --ci --coverage --silent --maxWorkers=50% --coverageReporters=lcov",
+    "prebuild": "npm run lint:check",
+    "build": "tsc --project tsconfig.build.json",
+    "dev": "nodemon --watch src --ext ts --exec \"tsc --project tsconfig.build.json\"",
+    "clean": "npm run clean:cache && npm run clean:dist && npm run clean:lock && npm run clean:node-modules",
+    "clean:cache": "npm cache clean --force",
+    "clean:dist": "rimraf dist",
+    "clean:lock": "rimraf package-lock.json",
+    "clean:node-modules": "rm -rf node_modules"
+  },
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@jest/globals": "^30.0.5",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.2.1",
+    "jest": "^30.0.5",
+    "nodemon": "^3.1.10",
+    "pino-pretty": "^13.1.1",
+    "prettier": "^3.6.2",
+    "swagger-typescript": "^6.9.0",
+    "ts-jest": "^29.4.1",
+    "typescript": "^5.9.2"
+  }
+}

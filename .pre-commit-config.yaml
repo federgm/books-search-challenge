@@ -1,0 +1,42 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      # Git styling
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: no-commit-to-branch
+
+      # Usual errors
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+      # Yaml file checks
+      - id: check-yaml
+      - id: check-executables-have-shebangs
+
+  # This are the local check we're doing
+  # Force commit convention using regex
+  # Run eslint validation on local
+  - repo: local
+    hooks:
+      - id: eslint
+        name: eslint code style check
+        entry: npm run lint:check
+        language: system
+        pass_filenames: false
+      - id: commit-message-check
+        name: commit message check
+        entry: |
+          bash -c '
+          COMMIT_MSG_FILE="$0"
+          COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+          REGEX="^(feat|fix)(\[^\)]+\))?: \[[a-zA-Z]+-[0-9]+\] .+|^(docs|style|refactor|perf|test|chore): .+"
+          if ! [[ "$COMMIT_MSG" =~ $REGEX ]]; then
+            echo "ERROR: commit does not match the following format:"
+            echo "<type><(optional scope)>: <[ticket-identifier]> <subject>"
+            exit 1
+          fi
+          '
+        language: system
+        stages: [commit-msg]
