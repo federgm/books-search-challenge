@@ -29,6 +29,6 @@
       "test/*": ["./test/*"]
     }
   },
-  "include": ["./src", "./test"],
+  "include": ["./src", "./test", "plugins/db.ts"],
   "exclude": ["node_modules/", "dist/"]
 }
