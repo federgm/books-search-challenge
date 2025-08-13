@@ -6,6 +6,7 @@ import { handleError } from "./libs/errors";
 import dbPlugin from "../plugins/db";
 import redisPlugin from "../plugins/redis";
 import { pinoConfig } from "./libs/logger";
+import BooksV1Routes from "./books/v1/search/routes";
 import config from "./config";
 
 export default async function bootstrap() {
@@ -42,6 +43,8 @@ export default async function bootstrap() {
 
   server.register(dbPlugin, config.db);
   server.register(redisPlugin, config.redis);
+
+  server.register(BooksV1Routes, { prefix: "v1" });
 
   server.get("/health", { logLevel: "warn" }, async (_request, reply) => {
     reply.status(200).send({ ok: true });
