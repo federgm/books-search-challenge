@@ -19,9 +19,11 @@ function buildDBClientPlugin(
     poolMin: config.poolMin,
     poolMax: config.poolMax,
   });
-  db.raw("SELECT *").then(async () => {
+
+  db.raw("SELECT 1").then(async () => {
     fastify.decorate("db", db);
     pluginIsReady();
+    fastify.log.info(" Client database build ready ");
   });
 }
 

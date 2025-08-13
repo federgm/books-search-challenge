@@ -17,6 +17,10 @@ services:
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       DATABASE_POOL_MIN: ${DATABASE_POOL_MIN}
       DATABASE_POOL_MAX: ${DATABASE_POOL_MAX}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+    depends_on:
+      - redis
 
   pgadmin:
     container_name: pgadmin
@@ -48,8 +52,18 @@ services:
     networks:
       - books-engine
 
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: ["redis-server", "--appendonly", "yes"]
+
 volumes:
   books-engine-data:
+  redis_data:
 
 networks:
   books-engine:
