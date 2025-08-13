@@ -15,14 +15,10 @@ const OpenLibraryApiDto = Type.Object({
 });
 
 const parametersDto = Type.Object({
-<<<<<<< Updated upstream
-  keyword: Type.String(),
-=======
   keywords: Type.String(),
   fields: Type.Optional(Type.String()),
   page: Type.Optional(Type.String()),
   force: Type.Optional(Type.String()),
->>>>>>> Stashed changes
 });
 
 export default {

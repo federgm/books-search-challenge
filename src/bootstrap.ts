@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 import FastifySwagger from "@fastify/swagger";
 import FastifySwaggerUi from "@fastify/swagger-ui";
 import { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
@@ -70,4 +68,3 @@ process.on("unhandledeRejection", (err) => {
   console.error("Unhandled error in the engine");
   process.exit(1);
 });
->>>>>>> Stashed changes

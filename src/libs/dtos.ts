@@ -1,4 +1,4 @@
-import { Static, TSchema, Type } from "@sinclair/typebox";
+import { TSchema, Type } from "@sinclair/typebox";
 
 export const ErrorResponseDto = Type.Object({
   message: Type.String(),

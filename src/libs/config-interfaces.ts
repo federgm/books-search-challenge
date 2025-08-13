@@ -1,5 +1,4 @@
-import Redis from "ioredis";
-import { Knex } from "knex";
+import knex, { Knex } from "knex";
 
 export interface Book {
   id: number;
@@ -24,18 +23,40 @@ export interface DatabaseConfig {
   poolMax?: number;
 }
 
+export interface RedisConfig {
+  host: string;
+  port: number;
+  password?: string;
+  db?: number;
+  connectTimeout?: number;
+}
+
 export interface Config {
   app: AppConfig;
   db: DatabaseConfig;
-  redis: Redis;
+  redis: RedisConfig;
 }
 
-export declare const buildKnexInstance: ({
+export const buildKnexInstance = ({
   host,
   port,
   user,
   password,
   database,
-  poolMin,
-  poolMax,
-}: DatabaseConfig) => Knex;
+  poolMin = 2,
+  poolMax = 10,
+}: DatabaseConfig): Knex =>
+  knex({
+    client: "pg",
+    connection: {
+      host,
+      port,
+      user,
+      password,
+      database,
+    },
+    pool: {
+      min: poolMin,
+      max: poolMax,
+    },
+  });

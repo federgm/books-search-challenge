@@ -1,4 +1,4 @@
-import { Config } from "./libs/config-interfaces.js";
+import { Config } from "./libs/config-interfaces";
 
 const config: Config = {
   app: {
@@ -14,6 +14,13 @@ const config: Config = {
     password: String(process.env.DATABASE_PASSWORD),
     poolMin: process.env.DATABASE_POOL_MIN ? Number(process.env.DATABASE_POOL_MIN) : undefined,
     poolMax: process.env.DATABASE_POOL_MAX ? Number(process.env.DATABASE_POOL_MAX) : undefined,
+  },
+  redis: {
+    host: process.env.REDIS_HOST || "127.0.0.1",
+    port: Number(process.env.REDIS_PORT || 6379),
+    password: process.env.REDIS_PASSWORD,
+    db: 0,
+    connectTimeout: 10000,
   },
 };
 

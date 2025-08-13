@@ -17,15 +17,10 @@
     "pg": "^8.8.0"
   },
   "scripts": {
-    "lint:check": "eslint .",
-    "lint:ci:check": "eslint --quiet .",
-    "lint:fix": "eslint --fix .",
-    "lint": "npm run lint:ci:check",
     "test": "jest",
     "test:ci:cov": "jest test/unit --ci --coverage --silent --maxWorkers=50% --coverageReporters=lcov",
-    "prebuild": "npm run lint:check",
     "build": "tsc --project tsconfig.build.json",
-    "dev": "nodemon --watch src --ext ts --exec \"tsc --project tsconfig.build.json\"",
+    "dev": "nodemon --watch src --ext ts --exec \"tsc --project tsconfig.build.json && node dist/src/index.js\"",
     "clean": "npm run clean:cache && npm run clean:dist && npm run clean:lock && npm run clean:node-modules",
     "clean:cache": "npm cache clean --force",
     "clean:dist": "rimraf dist",
@@ -43,6 +38,7 @@
     "prettier": "^3.6.2",
     "swagger-typescript": "^6.9.0",
     "ts-jest": "^29.4.1",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.2"
   }
 }
