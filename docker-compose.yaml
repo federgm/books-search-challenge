@@ -17,3 +17,41 @@ services:
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       DATABASE_POOL_MIN: ${DATABASE_POOL_MIN}
       DATABASE_POOL_MAX: ${DATABASE_POOL_MAX}
+
+  pgadmin:
+    container_name: pgadmin
+    env_file: .env
+    image: dpage/pgadmin4:8
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_DISABLE_POSTFIX: true
+    ports:
+      - "5050:80"
+    networks:
+      - books-engine
+    depends_on:
+      - booksdb
+
+  booksdb:
+    container_name: booksdb
+    platform: linux/arm64
+    restart: unless-stopped
+    image: postgres:16.1
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./init-local/postgres:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "5432:5432"
+    networks:
+      - books-engine
+
+volumes:
+  books-engine-data:
+
+networks:
+  books-engine:
+    name: books-engine
+    driver: bridge
