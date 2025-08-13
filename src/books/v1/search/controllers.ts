@@ -1,11 +1,11 @@
-import { NOT_FOUND } from "../../../libs/errors.js";
+import { NOT_FOUND } from "../../../libs/errors";
 import {
   FastifyReplyTyped,
   FastifyRequestTyped,
   FastifyTyped,
-} from "../../../libs/fastify-interfaces.js";
-import schemas from "./dtos.js";
-import { BookEntityService } from "./services.js";
+} from "../../../libs/fastify-interfaces";
+import schemas from "./dtos";
+import { BookEntityService } from "./services";
 
 export default (fastify: FastifyTyped) => {
   const entityService = new BookEntityService(fastify.db, fastify.redis, fastify.log);

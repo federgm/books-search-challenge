@@ -20,7 +20,10 @@ export const OpenLibraryApiDto = Type.Object({
 });
 
 const parametersDto = Type.Object({
-  keyword: Type.String(),
+  keywords: Type.String(),
+  fields: Type.String(),
+  page: Type.String(),
+  force: Type.Number(),
 });
 
 export type BookType = Static<typeof BookDto>;

@@ -1,13 +1,7 @@
 import { FastifyInstance } from "fastify";
 import FastifyPlugin from "fastify-plugin";
 import Redis from "ioredis";
-
-export interface RedisConfig {
-  host: string;
-  port: number;
-  password?: string;
-  db?: number;
-}
+import { RedisConfig } from "src/libs/config-interfaces";
 
 function buildRedisClientPlugin(
   fastify: FastifyInstance,
@@ -17,24 +11,21 @@ function buildRedisClientPlugin(
   fastify.log.info("Building Redis client");
 
   const redis = new Redis({
-    host: config.host,
-    port: config.port,
-    password: config.password,
+    host: "redis",
+    port: 6379,
     db: config.db ?? 0,
-    lazyConnect: true,
   });
 
-  redis
-    .connect()
-    .then(() => {
-      fastify.decorate("redis", redis);
-      fastify.log.info("Redis connection established");
-      pluginIsReady();
-    })
-    .catch((err) => {
-      fastify.log.error({ err }, "Redis connection failed");
-      throw err;
-    });
+  redis.on("connect", () => {
+    fastify.decorate("redis", redis);
+    fastify.log.info("Redis connection established");
+    pluginIsReady();
+  });
+
+  redis.on("error", (err) => {
+    fastify.log.error({ err }, "Redis connection failed");
+    throw err;
+  });
 
   fastify.addHook("onClose", async () => {
     fastify.log.info("Closing Redis connection");

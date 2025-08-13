@@ -1,6 +1,6 @@
-import { FastifyTyped } from "../../../libs/fastify-interfaces.js";
-import createControllers from "./controllers.js";
-import schemas from "./dtos.js";
+import { FastifyTyped } from "../../../libs/fastify-interfaces";
+import createControllers from "./controllers";
+import schemas from "./dtos";
 
 export default async (fastify: FastifyTyped) => {
   const controllerLogic = createControllers(fastify);
