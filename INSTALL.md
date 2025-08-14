@@ -102,6 +102,12 @@ npm run test:coverage
 
 ---
 
+## Initiate PG Database structure
+
+- Connect to your local docker postgres instance on localhost:5000 and once inside run the SQL located at the "init-local" folder in this repo.
+
+---
+
 ## Linter & formatting
 
 ```plaintext
