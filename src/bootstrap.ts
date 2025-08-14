@@ -41,8 +41,8 @@ export default async function bootstrap() {
     reply.status(status).send(body);
   });
 
-  server.register(dbPlugin, config.db);
-  server.register(redisPlugin, config.redis);
+  await server.register(dbPlugin, config.db);
+  await server.register(redisPlugin, config.redis);
 
   server.register(BooksV1Routes, { prefix: "v1" });
 

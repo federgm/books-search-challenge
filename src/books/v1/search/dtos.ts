@@ -25,7 +25,7 @@ export default {
   getBook: {
     params: parametersDto,
     response: {
-      200: OpenLibraryApiDto,
+      200: Type.Array(OpenLibraryApiDto),
       404: ErrorResponseDto,
       400: ErrorResponseDto,
     },

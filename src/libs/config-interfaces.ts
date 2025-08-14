@@ -1,5 +1,4 @@
 import knex, { Knex } from "knex";
-
 export interface Book {
   id: number;
   keyword: string;
@@ -54,6 +53,11 @@ export const buildKnexInstance = ({
       user,
       password,
       database,
+    },
+    migrations: {
+      directory: "src/migrations",
+      tableName: "knex_migrations",
+      schemaName: "books-search-engine",
     },
     pool: {
       min: poolMin,

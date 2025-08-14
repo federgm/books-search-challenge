@@ -25,3 +25,12 @@ export interface OpenLibraryApiDto {
   author_key: string;
   public_scan_b: boolean;
 }
+export interface OpenLibrarySearchResponse {
+  start?: number;
+  num_found?: number;
+  numFoundExact?: boolean;
+  numFound?: number;
+  docs: OpenLibraryApiDto[];
+  q?: string;
+  offset?: number | null;
+}

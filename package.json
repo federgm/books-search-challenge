@@ -19,6 +19,7 @@
   "scripts": {
     "test": "jest",
     "test:ci:cov": "jest test/unit --ci --coverage --silent --maxWorkers=50% --coverageReporters=lcov",
+    "lint": "npm run lint:ci:check",
     "build": "tsc --project tsconfig.build.json",
     "dev": "nodemon --watch src --ext ts --exec \"tsc --project tsconfig.build.json && node dist/src/index.js\"",
     "clean": "npm run clean:cache && npm run clean:dist && npm run clean:lock && npm run clean:node-modules",

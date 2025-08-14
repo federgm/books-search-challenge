@@ -7,8 +7,8 @@ This document explains how to install, configure, and run the project locally us
 ## 1. Clone the repository
 
 ```plaintext
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
+git clone https://github.com/federgm/books-search-challenge
+cd books-search-challenge
 ```
 
 ## 2. Environment variables
@@ -42,6 +42,8 @@ PGADMIN_DEFAULT_PASSWORD=<your-password>
 docker-compose up --build
 ```
 
+This will automatically create the schema, the "books" table and the "searchKey" index.
+
 This will start:
 
 ```plaintext
@@ -64,7 +66,28 @@ docker-compose down
 
 ## 4. Run without Docker (local mode)
 
-Requirements:
+To run in local mode, you'll need a library that's called [.dotenv](https://www.npmjs.com/package/dotenv)
+
+```plaintext
+npm install dotenv
+npm install --save-dev @types/dotenv
+```
+
+You'll also need to create a .env.local for the environment variables to be loaded so you didn't get
+an "variable not found" error
+
+```plaintext
+import * as dotenv from 'dotenv';
+dotenv.config({ path: '.env.local' });
+```
+
+Finally, you'll need to import this to get access to the variables using process.env
+
+```plaintext
+import dotenv from 'dotenv';
+```
+
+### Requirements:
 
 Node.js 20+
 

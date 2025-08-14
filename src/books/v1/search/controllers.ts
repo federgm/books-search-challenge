@@ -27,11 +27,11 @@ export default (fastify: FastifyTyped) => {
 
       const books = await entityService.getBookByKeyword(keywords, fields, page, force);
 
-      if (!books || !books.length) {
+      if (books.length === 0) {
         return reply.code(404).send({ message: NOT_FOUND });
       }
 
-      return reply.code(200).send(books);
+      return reply.code(200).send(books.docs);
     },
   };
 };
