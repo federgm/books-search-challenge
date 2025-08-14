@@ -22,6 +22,9 @@ function buildDBClientPlugin(
 
   db.raw("SELECT 1").then(async () => {
     fastify.decorate("db", db);
+    fastify.log.info(" Client database build ready ");
+    await db.raw(`CREATE SCHEMA IF NOT EXISTS "books-search-engine"`);
+    db.migrate.latest();
     pluginIsReady();
     fastify.log.info(" Client database build ready ");
   });

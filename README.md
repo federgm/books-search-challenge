@@ -65,7 +65,7 @@ npm run test
 With coverage report:
 
 ```plaintext
-npm run test:coverage
+npm run test:ci:cov
 ```
 
 🧹 Linter & formatting
@@ -73,12 +73,6 @@ Check style errors:
 
 ```plaintext
 npm run lint
-```
-
-Format with Prettier:
-
-```plaintext
-npm run format
 ```
 
 📝 License

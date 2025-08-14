@@ -25,16 +25,16 @@ export class BookEntityService {
   }
 
   async checkIfBookIsAvailable(searchKey: string) {
-    const result = await this.db("books").where({ searchKey }).first();
+    const result = await this.db("books-search-engine.books").where({ searchKey }).first();
     return result || null;
   }
 
-  async upsertBook(searchKey: string, content: OpenLibraryApiDto[]): Promise<void> {
+  async upsertBook(searchKey: string, content: OpenLibraryApiDto): Promise<void> {
     // Remove key from Postgres to force update
-    await this.db("books").where("searchKey", searchKey).del();
+    await this.db("books-search-engine.books").where("searchKey", searchKey).del();
 
     // Store key again in Postgres.
-    await this.db("books").insert({ searchKey, content });
+    await this.db("books-search-engine.books").insert({ searchKey, content });
 
     // Remove key from Redis to force update
     await this.redis.del(searchKey);
@@ -43,8 +43,8 @@ export class BookEntityService {
     await this.redis.set(searchKey, JSON.stringify(content), "EX", 3600);
   }
 
-  async storeBook(searchKey: string, content: OpenLibraryApiDto[]): Promise<void> {
-    await this.db("books").insert({ searchKey, content });
+  async storeBook(searchKey: string, content: OpenLibraryApiDto): Promise<void> {
+    await this.db("books-search-engine.books").insert({ searchKey, content });
     await this.redis.set(searchKey, JSON.stringify(content), "EX", 3600);
   }
 
@@ -60,23 +60,22 @@ export class BookEntityService {
     return `https://openlibrary.org/search.json?${urlParameters}`;
   }
 
-  async fetchFromExternal(url: string) {
+  async fetchFromExternal(url: string): Promise<OpenLibraryApiDto> {
     const openLibraryResponse: Response = await fetch(url);
-
     if (!openLibraryResponse.ok) {
       throw new Error(
         `OpenLibrary request failed: ${openLibraryResponse.status} ${openLibraryResponse.statusText}`,
       );
     }
 
-    return (await openLibraryResponse.json()) as OpenLibraryApiDto[];
+    return (await openLibraryResponse.json()) as OpenLibraryApiDto;
   }
 
   async getBookByKeyword(keywords: string, fields?: string, page?: string, force?: string) {
     try {
       const searchKey: string = this.getCacheKeyFromKeywords({ keywords, fields, page });
       const url = this.buildOpenLibraryUrl({ keywords, fields, page });
-      let searchResults: OpenLibraryApiDto[];
+      let searchResults: OpenLibraryApiDto;
 
       if (force === "false") {
         const cached = await this.redis.get(searchKey);
