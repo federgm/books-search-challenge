@@ -160,12 +160,6 @@ Check app logs:
 docker-compose logs -f app
 ```
 
-Access the database:
-
-```plaintext
-docker exec -it your_db_container_name psql -U book_user -d book_db
-```
-
 Clean volumes and cache:
 
 ```plaintext
