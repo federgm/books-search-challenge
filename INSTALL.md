@@ -17,10 +17,10 @@ Create a .env file in the project root:
 
 ```plaintext
 API_SERVER_HOST=0.0.0.0
-API_SERVER_PORT=3001
+API_SERVER_PORT=<select-your-port-for-the-api>
 LOG_LEVEL=info
 
-DATABASE_HOST=<db-host>
+DATABASE_HOST=host.docker.internal
 DATABASE_PORT=<db-port>
 DATABASE_NAME=<db-name>
 DATABASE_USERNAME=<db-username>
@@ -29,12 +29,25 @@ DATABASE_SSL=false
 DATABASE_POOL_MIN=2
 DATABASE_POOL_MAX=10
 
-REDIS_HOST=<redis-host>
+REDIS_HOST=redis
 REDIS_PORT=<redis-port>
+REDIS_INSIGHT_PORT=<redis-insight-port>
 
 PGADMIN_DEFAULT_EMAIL=<your-email>
 PGADMIN_DEFAULT_PASSWORD=<your-password>
+PGADMIN_HOST_PORT=<pgadmin-host-port>
+
 ```
+
+Notes:
+
+There are some configurations that are needed for the application to be able to interact with postgres and redis containers
+
+- API_SERVER_HOST needs to be "0.0.0.0"
+- DATABASE_HOST needs to be "host.docker.internal"
+- DATABASE_PORT, REDIS_PORT, REDIS_INSIGHT_PORT and PGADMIN_HOST_PORT are the ones being used to get your app up and running,
+  please select ports that you're not using on your local machine
+- REDIS_HOST needs to be "redis"
 
 ## 3. Run with Docker Compose
 
