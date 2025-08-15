@@ -70,7 +70,7 @@ tests/
 
 ## 📄 Installation & usage
 
-See the INSTALLATION.md file for detailed installation and execution steps.
+See the INSTALL.md file for detailed installation and execution steps.
 
 ## 🧪 Tests
 
