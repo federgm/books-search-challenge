@@ -34,6 +34,10 @@ REDIS_PORT=<redis-port>
 
 PGADMIN_DEFAULT_EMAIL=<your-email>
 PGADMIN_DEFAULT_PASSWORD=<your-password>
+<<<<<<< Updated upstream
+=======
+PGADMIN_HOST_PORT=<pgadmin-host-port>
+>>>>>>> Stashed changes
 ```
 
 ## 3. Run with Docker Compose
@@ -136,9 +140,6 @@ npm run test:coverage
 ```plaintext
 Check style:
 npm run lint
-
-Format code:
-npm run format
 ```
 
 ---
