@@ -15,23 +15,41 @@ Backend API built with **Fastify + TypeScript** for searching, storing, and cach
 ## 📂 Project structure
 
 ```plaintext
+plugins/
+  db.ts
+  redis.ts
 src/
-  modules/
-    books/
-      controller.ts
-      services.ts
-      dtos.ts
+  books/
+    v1/
+      search/
+        controller.ts
+        dtos.ts
+        routes.ts
+        services.ts
   libs/
+    config-interfaces.ts
+    constants.ts
+    dtos.ts
     errors.ts
     fastify-interfaces.ts
-  tests/
+    logger.ts
+  migrations/
+    <all-knex-migrations-will-be-hosted-here>
+  types/
+    types.d.ts
+  bootstrap.ts
+  config.ts
+  index.ts
+tests/
     unit/
-    integration/
-docker-compose.yml
-tsconfig.json
-jest.config.js
-.eslintrc.js
-.prettierrc
+      books/
+        v1/
+          search/
+            controllers.spec.ts
+            services.spec.ts
+      libs/
+        errors.spec.ts
+<more-configuration-and-setting-files>
 ```
 
 ## 🛠 Architecture
@@ -66,13 +84,6 @@ With coverage report:
 
 ```plaintext
 npm run test:ci:cov
-```
-
-🧹 Linter & formatting
-Check style errors:
-
-```plaintext
-npm run lint
 ```
 
 📝 License
