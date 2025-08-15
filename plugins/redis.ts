@@ -11,8 +11,8 @@ function buildRedisClientPlugin(
   fastify.log.info("Building Redis client");
 
   const redis = new Redis({
-    host: "redis",
-    port: 6379,
+    host: config.host,
+    port: 6379, // Setting this here as is the port where redis will run on the container
     db: config.db ?? 0,
   });
 
