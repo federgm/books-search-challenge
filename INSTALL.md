@@ -36,7 +36,6 @@ REDIS_INSIGHT_PORT=<redis-insight-port>
 PGADMIN_DEFAULT_EMAIL=<your-email>
 PGADMIN_DEFAULT_PASSWORD=<your-password>
 PGADMIN_HOST_PORT=<pgadmin-host-port>
-
 ```
 
 Notes:
@@ -149,9 +148,6 @@ npm run test:coverage
 ```plaintext
 Check style:
 npm run lint
-
-Format code:
-npm run format
 ```
 
 ---
