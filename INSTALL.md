@@ -18,6 +18,7 @@ Create a .env file in the project root:
 ```plaintext
 API_SERVER_HOST=0.0.0.0
 API_SERVER_PORT=<select-your-port-for-the-api>
+API_ROUTE_PREFIX=<insert-the-api-prefix-here>
 LOG_LEVEL=info
 
 DATABASE_HOST=host.docker.internal
